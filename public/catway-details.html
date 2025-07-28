@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Détail d’un catway</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    form { margin-bottom: 20px; padding: 10px; background: white; border: 1px solid #ccc; border-radius: 6px; }
+    input, button { margin: 5px 0; padding: 8px; width: 100%; }
+    .result { background: #fff; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    .error { color: red; margin-top: 10px; }
+    .success { color: green; margin-top: 10px; }
+    a.button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 14px;
+      background: #007BFF;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔎 Détail d’un catway par numéro</h1>
+
+  <form id="catwayForm">
+    <label>Entrez le numéro du catway :</label><br>
+    <input type="number" name="catwayNumber" required placeholder="ex: 1" />
+    <button type="submit">Afficher</button>
+  </form>
+
+  <div class="result" id="catwayDetails"></div>
+  <p id="feedback"></p>
+
+  <a class="button" href="/catways.html">⟵ Retour à la gestion des catways</a>
+
+  <script>
+    document.getElementById('catwayForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const numero = e.target.catwayNumber.value.trim();
+      const feedback = document.getElementById('feedback');
+      const details = document.getElementById('catwayDetails');
+      feedback.textContent = '';
+      feedback.className = '';
+      details.innerHTML = '';
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        feedback.className = 'error';
+        feedback.textContent = '⛔ Token manquant : veuillez vous reconnecter.';
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:5000/api/catways/numero/${numero}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          feedback.className = 'error';
+          feedback.textContent = '❌ Erreur : ' + (data.error || 'Catway introuvable');
+          return;
+        }
+
+        feedback.className = 'success';
+        feedback.textContent = '✅ Catway trouvé';
+        details.innerHTML = `
+          <p><strong>Numéro :</strong> ${data.catwayNumber}</p>
+          <p><strong>Type :</strong> ${data.type}</p>
+          <p><strong>État :</strong> ${data.catwayState}</p>
+          <p><strong>ID Mongo :</strong> ${data._id}</p>
+        `;
+      } catch (err) {
+        feedback.className = 'error';
+        feedback.textContent = '❌ Erreur de communication avec le serveur.';
+      }
+    });
+  </script>
+
+</body>
+</html>

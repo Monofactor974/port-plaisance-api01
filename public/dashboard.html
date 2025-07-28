@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tableau de bord</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    nav {
+      margin-bottom: 20px;
+    }
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #007BFF;
+    }
+    .menu {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #ccc;
+      max-width: 400px;
+    }
+    .menu h2 {
+      margin-top: 0;
+    }
+    .menu a.button {
+      display: block;
+      padding: 10px;
+      margin: 10px 0;
+      text-align: center;
+      background: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .menu a.button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/dashboard.html">Accueil</a>
+    <a href="/catways.html">Catways</a>
+    <a href="/reservations.html">Réservations</a>
+    <a href="/documentation.html">Documentation</a>
+    <a href="/index.html" onclick="localStorage.clear()">Déconnexion</a>
+  </nav>
+
+  <div class="menu">
+    <h2 id="welcomeBanner"></h2>
+    <a href="/catways.html" class="button">📦 Gérer les catways</a>
+    <a href="/reservations.html" class="button">📅 Gérer les réservations</a>
+    <a href="/documentation.html" class="button">📖 Voir la documentation</a>
+  </div>
+
+  <script>
+    const name = localStorage.getItem('userName') || 'Utilisateur';
+    document.getElementById('welcomeBanner').textContent = `Bienvenue, ${name} 👋`;
+  </script>
+</body>
+</html>

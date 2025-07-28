@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="style.css" />
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Documentation API – Port Russell</title>
+</head>
+<body>
+  <h1>📘 Documentation de l’API</h1>
+
+  <h2>🔐 Authentification</h2>
+  <ul>
+    <li><code>POST /api/users/register</code> – Créer un utilisateur</li>
+    <li><code>POST /api/auth/login</code> – Se connecter (reçoit un token)</li>
+  </ul>
+
+  <h2>⚓ Catways</h2>
+  <ul>
+    <li><code>GET /api/catways</code> – Liste de tous les catways</li>
+    <li><code>GET /api/catways/:id</code> – Détails d’un catway</li>
+    <li><code>POST /api/catways</code> – Ajouter un catway</li>
+    <li><code>PUT /api/catways/:id</code> – Remplacer un catway</li>
+    <li><code>PATCH /api/catways/:id</code> – Modifier partiellement un catway</li>
+    <li><code>DELETE /api/catways/:id</code> – Supprimer un catway</li>
+  </ul>
+
+  <h2>🛥️ Réservations</h2>
+  <ul>
+    <li><code>GET /api/catways/:id/reservations</code> – Liste des réservations pour un catway</li>
+    <li><code>GET /api/catways/:id/reservations/:reservationId</code> – Détail d’une réservation</li>
+    <li><code>POST /api/catways/:id/reservations</code> – Créer une réservation</li>
+    <li><code>DELETE /api/catways/:id/reservations/:reservationId</code> – Supprimer une réservation</li>
+  </ul>
+
+  <h2>🧾 Glossaire</h2>
+  <ul>
+    <li><strong>catwayNumber</strong> – Numéro du pont</li>
+    <li><strong>type</strong> – "long" ou "short"</li>
+    <li><strong>catwayState</strong> – État du catway</li>
+    <li><strong>clientName</strong> – Nom du plaisancier</li>
+    <li><strong>boatName</strong> – Nom du bateau</li>
+  </ul>
+
+  <p><a href="/index.html">Retour à l’accueil</a></p>
+</body>
+</html>

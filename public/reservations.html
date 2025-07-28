@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Réservations</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    form { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; }
+    input, button { margin: 5px 0; }
+    .success { color: green; }
+    .error { color: red; }
+    pre { background: #f4f4f4; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Gestion des réservations</h1>
+
+  <h2>Créer une réservation</h2>
+  <form id="createForm">
+    <label>Catway Number :</label><br>
+    <input type="number" name="catwayNumber" required><br>
+    <label>Nom du client :</label><br>
+    <input type="text" name="clientName" required><br>
+    <label>Nom du bateau :</label><br>
+    <input type="text" name="boatName" required><br>
+    <label>Date d’arrivée :</label><br>
+    <input type="date" name="checkIn" required><br>
+    <label>Date de départ :</label><br>
+    <input type="date" name="checkOut" required><br><br>
+    <button type="submit">Réserver</button>
+  </form>
+  <p id="createFeedback"></p>
+
+  <h2>Supprimer une réservation</h2>
+  <form id="deleteForm">
+    <label>ID du catway :</label><br>
+    <input type="text" name="catwayId" required><br>
+    <label>ID de la réservation :</label><br>
+    <input type="text" name="reservationId" required><br><br>
+    <button type="submit">Supprimer</button>
+  </form>
+  <p id="deleteFeedback"></p>
+
+  <h2>Afficher les détails d’une réservation</h2>
+  <form id="getForm">
+    <label>ID du catway :</label><br>
+    <input type="text" name="catwayId" required><br><br>
+    <button type="submit">Afficher</button>
+  </form>
+  <pre id="reservationDetails"></pre>
+
+  <p><a href="/reservations-list.html">Voir la liste complète des réservations ➜</a></p>
+
+  <script>
+    const BASE = 'http://localhost:5000/api/catways';
+
+    // Créer
+    document.getElementById('createForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const catwayId = f.catwayNumber.value;
+      const body = {
+        clientName: f.clientName.value,
+        boatName: f.boatName.value,
+        checkIn: f.checkIn.value,
+        checkOut: f.checkOut.value
+      };
+      const res = await fetch(`${BASE}/${catwayId}/reservations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      const fb = document.getElementById('createFeedback');
+      fb.className = res.ok ? 'success' : 'error';
+      fb.textContent = res.ok ? 'Réservation enregistrée ✅' : 'Erreur : ' + data.error;
+      if (res.ok) f.reset();
+    });
+
+    // Supprimer
+    document.getElementById('deleteForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const res = await fetch(`${BASE}/${f.catwayId.value}/reservations/${f.reservationId.value}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      const fb = document.getElementById('deleteFeedback');
+      fb.className = res.ok ? 'success' : 'error';
+      fb.textContent = res.ok ? 'Réservation supprimée ✅' : 'Erreur : ' + data.error;
+    });
+
+    // Afficher les détails
+    document.getElementById('getForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = e.target.catwayId.value;
+      const res = await fetch(`${BASE}/${id}/reservations`);
+      const data = await res.json();
+      const box = document.getElementById('reservationDetails');
+      box.textContent = '';
+      if (!res.ok) {
+        box.textContent = 'Erreur : ' + (data.error || 'Impossible de récupérer les données.');
+        return;
+      }
+      if (data.length === 0) {
+        box.textContent = 'Aucune réservation pour ce catway.';
+        return;
+      }
+      box.textContent = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>

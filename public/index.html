@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Port de Plaisance Russell – Connexion</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <a href="/index.html">Accueil</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/reservations.html">Réservations</a>
+    <a href="/documentation.html">Documentation</a>
+  </nav>
+
+  <h1>Bienvenue au Port de Plaisance Russell</h1>
+
+  <!-- Connexion -->
+  <h2>Se connecter</h2>
+  <form id="loginForm">
+    <label>Email :</label><br />
+    <input type="email" name="email" required /><br />
+    <label>Mot de passe :</label><br />
+    <input type="password" name="password" required /><br /><br />
+    <button type="submit">Se connecter</button>
+  </form>
+  <p id="loginFeedback"></p>
+
+  <!-- Inscription -->
+  <h2>Créer un compte</h2>
+  <form id="registerForm">
+    <label>Nom :</label><br />
+    <input type="text" name="name" required /><br />
+    <label>Email :</label><br />
+    <input type="email" name="email" required /><br />
+    <label>Mot de passe :</label><br />
+    <input type="password" name="password" required /><br /><br />
+    <button type="submit">S’inscrire</button>
+  </form>
+  <p id="registerFeedback"></p>
+
+  <script>
+    // Connexion
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.email.value;
+      const password = form.password.value;
+
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+      const feedback = document.getElementById('loginFeedback');
+      if (response.ok && data.token) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userName', data.name); // 👈 enregistré à la connexion
+        feedback.textContent = 'Connexion réussie ! Redirection…';
+        window.location.href = '/dashboard.html';
+      } else {
+        feedback.textContent = 'Erreur : ' + (data.error || 'identifiants invalides');
+      }
+    });
+
+    // Inscription
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+
+      const body = {
+        name: form.name.value,
+        email: form.email.value,
+        password: form.password.value
+      };
+
+      const response = await fetch('http://localhost:5000/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      const data = await response.json();
+      const feedback = document.getElementById('registerFeedback');
+      if (response.ok) {
+        feedback.textContent = 'Compte créé avec succès ! Vous pouvez maintenant vous connecter.';
+        form.reset();
+      } else {
+        feedback.textContent = 'Erreur : ' + (data.error || 'échec de l’inscription');
+      }
+    });
+  </script>
+</body>
+</html>

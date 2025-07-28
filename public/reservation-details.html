@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Détail d’une réservation</title>
+  <p><a href="/reservations.html" style="display:inline-block; padding:8px 12px; background:#007BFF; color:white; text-decoration:none; border-radius:4px;">⟵ Retour à la page des réservations</a></p>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    form { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; }
+    input, button { margin: 5px 0; }
+    .error { color: red; }
+    .success { color: green; }
+    pre { background: #f4f4f4; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h1>Détail d’une réservation</h1>
+
+  <form id="detailsForm">
+    <label>ID du catway :</label><br>
+    <input type="text" name="catwayId" required><br>
+    <label>ID de la réservation :</label><br>
+    <input type="text" name="reservationId" required><br><br>
+    <button type="submit">Afficher</button>
+  </form>
+
+  <pre id="reservationOutput"></pre>
+  <p id="feedback"></p>
+
+  <script>
+    const API_BASE = 'http://localhost:5000/api/catways';
+
+    document.getElementById('detailsForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const catwayId = e.target.catwayId.value.trim();
+      const reservationId = e.target.reservationId.value.trim();
+
+      const res = await fetch(`${API_BASE}/${catwayId}/reservations/${reservationId}`);
+      const output = document.getElementById('reservationOutput');
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = '';
+      output.textContent = '';
+
+      try {
+        const data = await res.json();
+        if (!res.ok) {
+          feedback.className = 'error';
+          feedback.textContent = 'Erreur : ' + (data.error || 'Réservation introuvable');
+          return;
+        }
+
+        feedback.className = 'success';
+        feedback.textContent = 'Réservation trouvée ✅';
+        output.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        feedback.className = 'error';
+        feedback.textContent = 'Erreur : réponse invalide du serveur.';
+      }
+    });
+  </script>
+</body>
+</html>

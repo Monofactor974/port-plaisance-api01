@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestion des catways</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    form { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; }
+    input, select, button { margin: 5px 0; }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Gestion des catways</h1>
+
+  <h2>Créer un catway</h2>
+  <form id="createForm">
+    <label>Numéro :</label><br>
+    <input type="number" name="catwayNumber" required><br>
+    <label>Type :</label><br>
+    <select name="type" required>
+      <option value="">-- Choisir --</option>
+      <option value="long">Long</option>
+      <option value="short">Short</option>
+    </select><br>
+    <label>État :</label><br>
+    <input type="text" name="catwayState" required><br><br>
+    <button type="submit">Créer</button>
+  </form>
+  <p id="createFeedback"></p>
+
+  <h2>Modifier l’état d’un catway</h2>
+  <form id="updateForm">
+    <label>ID :</label><br>
+    <input type="text" name="catwayId" required><br>
+    <label>Nouvel état :</label><br>
+    <input type="text" name="catwayState" required><br><br>
+    <button type="submit">Mettre à jour</button>
+  </form>
+  <p id="updateFeedback"></p>
+
+  <h2>Supprimer un catway</h2>
+  <form id="deleteForm">
+    <label>ID :</label><br>
+    <input type="text" name="catwayId" required><br><br>
+    <button type="submit">Supprimer</button>
+  </form>
+  <p id="deleteFeedback"></p>
+
+  <h2>Afficher un catway par numéro</h2>
+  <form id="showForm">
+    <label>Numéro :</label><br>
+    <input type="number" name="catwayId" required><br><br>
+    <button type="submit">Afficher</button>
+  </form>
+  <pre id="showResult"></pre>
+
+  <h2>Liste des catways</h2>
+  <button id="loadCatways">Charger la liste</button>
+  <ul id="catwayList"></ul>
+
+  <a href="/catway-details.html" style="display:inline-block; padding:10px 16px; background:#28a745; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">
+    🔍 Voir un catway en détail
+  </a>
+
+  <script>
+    const API = 'http://localhost:5000/api/catways';
+    const token = localStorage.getItem('token');
+
+    const defaultHeaders = token
+      ? { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+      : { 'Content-Type': 'application/json' };
+
+    // Créer
+    document.getElementById('createForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!token) return showError('createFeedback', 'Token manquant');
+
+      const f = e.target;
+      const body = {
+        catwayNumber: f.catwayNumber.value,
+        type: f.type.value,
+        catwayState: f.catwayState.value
+      };
+      try {
+        const res = await fetch(API, {
+          method: 'POST',
+          headers: defaultHeaders,
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        showFeedback('createFeedback', res.ok, data.error);
+        if (res.ok) f.reset();
+      } catch {
+        showError('createFeedback', 'Erreur serveur');
+      }
+    });
+
+    // Modifier
+    document.getElementById('updateForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!token) return showError('updateFeedback', 'Token manquant');
+
+      const f = e.target;
+      try {
+        const res = await fetch(`${API}/${f.catwayId.value}`, {
+          method: 'PATCH',
+          headers: defaultHeaders,
+          body: JSON.stringify({ catwayState: f.catwayState.value })
+        });
+        const data = await res.json();
+        showFeedback('updateFeedback', res.ok, data.error);
+      } catch {
+        showError('updateFeedback', 'Erreur serveur');
+      }
+    });
+
+    // Supprimer
+    document.getElementById('deleteForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!token) return showError('deleteFeedback', 'Token manquant');
+
+      const id = e.target.catwayId.value;
+      try {
+        const res = await fetch(`${API}/${id}`, {
+          method: 'DELETE',
+          headers: defaultHeaders
+        });
+        const data = await res.json();
+        showFeedback('deleteFeedback', res.ok, data.error);
+      } catch {
+        showError('deleteFeedback', 'Erreur serveur');
+      }
+    });
+
+    // Afficher un catway par numéro
+    document.getElementById('showForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const feedback = document.getElementById('showResult');
+      feedback.textContent = '';
+      feedback.className = '';
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        feedback.className = 'error';
+        feedback.textContent = '⛔ Token manquant : veuillez vous reconnecter.';
+        return;
+      }
+
+      const numero = e.target.catwayId.value.trim();
+      if (!numero) {
+        feedback.className = 'error';
+        feedback.textContent = '⛔ Veuillez saisir un numéro de catway.';
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API}/numero/${numero}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          feedback.className = 'error';
+          feedback.textContent = res.status === 404
+            ? `❌ Aucun catway trouvé avec le numéro ${numero}.`
+            : `❌ Erreur : ${data.error || 'Inconnue'}`;
+          return;
+        }
+
+        feedback.className = 'success';
+        feedback.textContent = JSON.stringify(data, null, 2);
+      } catch {
+        feedback.className = 'error';
+        feedback.textContent = '❌ Erreur de communication avec le serveur.';
+      }
+    });
+
+    // Liste
+    document.getElementById('loadCatways').addEventListener('click', async () => {
+      const list = document.getElementById('catwayList');
+      list.innerHTML = '';
+      if (!token) return list.innerHTML = '<li>Token manquant</li>';
+
+      try {
+        const res = await fetch(API, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (!res.ok || !Array.isArray(data)) {
+          list.innerHTML = `<li>Erreur : ${data.error || 'Accès refusé'}</li>`;
+          return;
+        }
+
+        data.forEach(c => {
+          const li = document.createElement('li');
+          li.textContent = `${c.catwayNumber} • ${c.type} • état : ${c.catwayState}`;
+          list.appendChild(li);
+        });
+      } catch {
+        list.innerHTML = '<li>Erreur de communication avec le serveur.</li>';
+      }
+    });
+
+    function showFeedback(id, ok, message) {
+      const p = document.getElementById(id);
+      p.className = ok ? 'success' : 'error';
+      p.textContent = ok ? '✅ Opération réussie' : '❌ ' + message;
+    }
+
+    function showError(id, msg) {
+      const p = document.getElementById(id);
+      p.className = 'error';
+      p.textContent = '❌ ' + msg;
+    }
+  </script>
+</body>
+</html>
