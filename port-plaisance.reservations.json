@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "685277a61bc8fad80667da9f"
+  },
+  "catwayNumber": 1,
+  "clientName": "Thomas Martin",
+  "boatName": "Carolina",
+  "checkIn": "2022-05-21T06:00:00Z",
+  "checkOut": "2022-10-27T06:00:00Z"
+},
+{
+  "_id": {
+    "$oid": "685277a61bc8fad80667daa0"
+  },
+  "catwayNumber": 2,
+  "clientName": "John Doe",
+  "boatName": "Groeland",
+  "checkIn": "2022-05-18T06:00:00Z",
+  "checkOut": "2022-11-30T06:00:00Z"
+},
+{
+  "_id": {
+    "$oid": "685277a61bc8fad80667daa1"
+  },
+  "catwayNumber": 3,
+  "clientName": "Margareth Wurtz",
+  "boatName": "Sirène",
+  "checkIn": "2022-06-20T06:00:00Z",
+  "checkOut": "2022-08-27T06:00:00Z"
+},
+{
+  "_id": {
+    "$oid": "685277a61bc8fad80667daa2"
+  },
+  "catwayNumber": 7,
+  "clientName": "Ralph Laurent",
+  "boatName": "Surcouf",
+  "checkIn": "2022-07-01T06:00:00Z",
+  "checkOut": "2022-10-13T06:00:00Z"
+},
+{
+  "_id": {
+    "$oid": "685277a61bc8fad80667daa3"
+  },
+  "catwayNumber": 11,
+  "clientName": "Jack Sparrow",
+  "boatName": "Black perl",
+  "checkIn": "2022-08-13T06:00:00Z",
+  "checkOut": "2022-09-13T06:00:00Z"
+},
+{
+  "_id": {
+    "$oid": "685277a61bc8fad80667daa4"
+  },
+  "catwayNumber": 13,
+  "clientName": "Jacky Snow",
+  "boatName": "léandra",
+  "checkIn": "2022-09-18T06:00:00Z",
+  "checkOut": "2022-12-23T06:00:00Z"
+}]

@@ -1,0 +1,307 @@
+[{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da78"
+  },
+  "catwayNumber": 1,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da79"
+  },
+  "catwayNumber": 2,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da7a"
+  },
+  "catwayNumber": 3,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da7b"
+  },
+  "catwayNumber": 4,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da7c"
+  },
+  "catwayNumber": 5,
+  "type": "long",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da7d"
+  },
+  "catwayNumber": 6,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da7e"
+  },
+  "catwayNumber": 7,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da7f"
+  },
+  "catwayNumber": 8,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da80"
+  },
+  "catwayNumber": 9,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da81"
+  },
+  "catwayNumber": 10,
+  "type": "long",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da82"
+  },
+  "catwayNumber": 11,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da83"
+  },
+  "catwayNumber": 12,
+  "type": "short",
+  "catwayState": "grosse tâche d'huile et trou en fin de ponton"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da84"
+  },
+  "catwayNumber": 13,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da85"
+  },
+  "catwayNumber": 14,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da86"
+  },
+  "catwayNumber": 15,
+  "type": "long",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da87"
+  },
+  "catwayNumber": 16,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da88"
+  },
+  "catwayNumber": 17,
+  "type": "short",
+  "catwayState": "2 planches bougent lorsqu'on marche dessus"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da89"
+  },
+  "catwayNumber": 18,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da8a"
+  },
+  "catwayNumber": 19,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da8b"
+  },
+  "catwayNumber": 20,
+  "type": "long",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da8c"
+  },
+  "catwayNumber": 21,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da8d"
+  },
+  "catwayNumber": 22,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da8e"
+  },
+  "catwayNumber": 23,
+  "type": "short",
+  "catwayState": "La bite d'amarrage est légèrement désolidarisée"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da8f"
+  },
+  "catwayNumber": 24,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da90"
+  },
+  "catwayNumber": 25,
+  "type": "long",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da91"
+  },
+  "catwayNumber": 26,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da92"
+  },
+  "catwayNumber": 27,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da93"
+  },
+  "catwayNumber": 28,
+  "type": "short",
+  "catwayState": "En cours de réparation. Ne peut être réservée actuellement"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da94"
+  },
+  "catwayNumber": 29,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da95"
+  },
+  "catwayNumber": 30,
+  "type": "long",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da96"
+  },
+  "catwayNumber": 31,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da97"
+  },
+  "catwayNumber": 32,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da98"
+  },
+  "catwayNumber": 33,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da99"
+  },
+  "catwayNumber": 34,
+  "type": "short",
+  "catwayState": "bon état"
+},
+{
+  "_id": {
+    "$oid": "6852743a1bc8fad80667da9a"
+  },
+  "catwayNumber": 35,
+  "type": "long",
+  "catwayState": "Plusieurs grandes tâches de peinture bleue sur le ponton"
+},
+{
+  "_id": {
+    "$oid": "68580a3f661016fbc8b41ad1"
+  },
+  "catwayNumber": 36,
+  "type": "long",
+  "catwayState": "sale",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6858235f661016fbc8b41adc"
+  },
+  "catwayNumber": 37,
+  "type": "long",
+  "catwayState": "propre",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685bc5d9661016fbc8b41b05"
+  },
+  "catwayNumber": 38,
+  "type": "long",
+  "catwayState": "propre",
+  "__v": 0
+}]

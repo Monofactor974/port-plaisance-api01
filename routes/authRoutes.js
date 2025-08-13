@@ -21,4 +21,22 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// 🔐 Enregistrement utilisateur
+router.post('/register', async (req, res) => {
+  const { email, password, name } = req.body;
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ error: 'Utilisateur déjà existant' });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({ email, password: hashedPassword, name });
+    await user.save();
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.status(201).json({ token, name: user.name, userId: user._id });
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur serveur lors de l’enregistrement' });
+  }
+});
+
 module.exports = router;
