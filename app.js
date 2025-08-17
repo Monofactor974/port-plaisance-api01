@@ -37,3 +37,11 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Serveur lancé sur le port ${PORT}`);
 });
+
+// 🔹 Sert les fichiers HTML, CSS, etc.
+app.use(express.static(path.join(__dirname, 'public')));
+
+// 🔹 Route pour la documentation
+app.get('/documentation', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'documentation.html'));
+});

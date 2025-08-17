@@ -1,46 +1,102 @@
-<link rel="stylesheet" href="style.css" />
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Documentation API – Port Russell</title>
+  <meta charset="UTF-8">
+  <title>Documentation API – Port de Plaisance Russell</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+    h1, h2, h3 { color: #004080; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 6px; overflow-x: auto; }
+    .section { margin-bottom: 40px; }
+  </style>
 </head>
 <body>
-  <h1>📘 Documentation de l’API</h1>
 
-  <h2>🔐 Authentification</h2>
-  <ul>
-    <li><code>POST /api/users/register</code> – Créer un utilisateur</li>
-    <li><code>POST /api/auth/login</code> – Se connecter (reçoit un token)</li>
-  </ul>
+  <h1>⚓️ Documentation API – Port de Plaisance Russell</h1>
 
-  <h2>⚓ Catways</h2>
-  <ul>
-    <li><code>GET /api/catways</code> – Liste de tous les catways</li>
-    <li><code>GET /api/catways/:id</code> – Détails d’un catway</li>
-    <li><code>POST /api/catways</code> – Ajouter un catway</li>
-    <li><code>PUT /api/catways/:id</code> – Remplacer un catway</li>
-    <li><code>PATCH /api/catways/:id</code> – Modifier partiellement un catway</li>
-    <li><code>DELETE /api/catways/:id</code> – Supprimer un catway</li>
-  </ul>
+  <div class="section">
+    <h2>Vue d’ensemble</h2>
+    <ul>
+      <li><strong>Base URL :</strong> <code>https://port-plaisance-api-6egt.onrender.com</code></li>
+      <li><strong>Technologies :</strong> Node.js, Express, MongoDB Atlas, JWT</li>
+      <li><strong>Authentification :</strong> via token JWT</li>
+    </ul>
+  </div>
 
-  <h2>🛥️ Réservations</h2>
-  <ul>
-    <li><code>GET /api/catways/:id/reservations</code> – Liste des réservations pour un catway</li>
-    <li><code>GET /api/catways/:id/reservations/:reservationId</code> – Détail d’une réservation</li>
-    <li><code>POST /api/catways/:id/reservations</code> – Créer une réservation</li>
-    <li><code>DELETE /api/catways/:id/reservations/:reservationId</code> – Supprimer une réservation</li>
-  </ul>
+  <div class="section">
+    <h2>Tutoriel d’utilisation</h2>
+    <h3>1. Enregistrement</h3>
+    <pre><code>POST /api/auth/register</code></pre>
+    <pre>{
+  "email": "jeanluc@russell.fr",
+  "password": "russell2025",
+  "name": "Jean-Luc"
+}</pre>
 
-  <h2>🧾 Glossaire</h2>
-  <ul>
-    <li><strong>catwayNumber</strong> – Numéro du pont</li>
-    <li><strong>type</strong> – "long" ou "short"</li>
-    <li><strong>catwayState</strong> – État du catway</li>
-    <li><strong>clientName</strong> – Nom du plaisancier</li>
-    <li><strong>boatName</strong> – Nom du bateau</li>
-  </ul>
+    <h3>2. Connexion</h3>
+    <pre><code>POST /api/auth/login</code></pre>
+    <pre>{
+  "email": "jeanluc@russell.fr",
+  "password": "russell2025"
+}</pre>
 
-  <p><a href="/index.html">Retour à l’accueil</a></p>
+    <h3>3. Utilisation du token</h3>
+    <pre><code>Authorization: Bearer &lt;JWT_TOKEN&gt;</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Exemples de requêtes</h2>
+    <h3>Catways</h3>
+    <ul>
+      <li><code>GET /api/catways</code> – Lister tous les catways</li>
+      <li><code>GET /api/catways/:id</code> – Détails d’un catway</li>
+      <li><code>POST /api/catways</code> – Créer un catway</li>
+      <li><code>PUT /api/catways/:id</code> – Modifier un catway</li>
+      <li><code>PATCH /api/catways/:id</code> – Modifier partiellement</li>
+      <li><code>DELETE /api/catways/:id</code> – Supprimer un catway</li>
+    </ul>
+
+    <h3>Réservations</h3>
+    <ul>
+      <li><code>GET /api/catways/:id/reservations</code> – Lister les réservations</li>
+      <li><code>GET /api/catways/:id/reservations/:idReservation</code> – Détails d’une réservation</li>
+      <li><code>POST /api/catways/:id/reservations</code> – Ajouter une réservation</li>
+      <li><code>DELETE /api/catways/:id/reservations/:idReservation</code> – Supprimer une réservation</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Structure des données</h2>
+    <h3>Utilisateur</h3>
+    <pre>{
+  "name": "Jean-Luc",
+  "email": "jeanluc@russell.fr",
+  "password": "hashé"
+}</pre>
+
+    <h3>Catway</h3>
+    <pre>{
+  "catwayNumber": 7,
+  "type": "long",
+  "catwayState": "Disponible"
+}</pre>
+
+    <h3>Réservation</h3>
+    <pre>{
+  "catwayNumber": 7,
+  "clientName": "Jean-Luc Picard",
+  "boatName": "Enterprise",
+  "checkIn": "2025-08-15T00:00:00.000Z",
+  "checkOut": "2025-08-20T00:00:00.000Z"
+}</pre>
+  </div>
+
+  <div class="section">
+    <h2>Auteur</h2>
+    <p>Jean-Luc – Étudiant en développement web<br>
+    Projet réalisé dans le cadre du module <em>[Nom du cours ou de l’enseignant]</em></p>
+  </div>
+
 </body>
 </html>
