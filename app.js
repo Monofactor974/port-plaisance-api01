@@ -12,12 +12,13 @@ app.use(cors());
 app.use(express.json());
 
 //  Connexion à MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+try{mongoose.connect("mongodb+srv://Monofactor:Monofactor@cluster0.vtdf7y5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 .then(() => console.log(" Connexion à MongoDB réussie"))
-.catch((err) => console.error(" Erreur de connexion MongoDB :", err));
+.catch((err) => console.error(" Erreur de connexion MongoDB :", err));}
+catch(err){console.log(err)}
 
 //  Routes publiques
 app.use('/api/auth', require('./routes/authRoutes'));
