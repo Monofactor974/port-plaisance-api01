@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Catway = require('../models/Catway');
 
-// 🟢 Créer un catway
+//  Créer un catway
 router.post('/', async (req, res) => {
   try {
     const newCatway = new Catway(req.body);
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 📄 Liste complète des catways
+//  Liste complète des catways
 router.get('/', async (req, res) => {
   try {
     const list = await Catway.find();
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 🔍 Chercher par numéro (⚠️ placer avant /:id)
+//  Chercher par numéro (⚠️ placer avant /:id)
 router.get('/numero/:catwayNumber', async (req, res) => {
   const numero = Number(req.params.catwayNumber);
   if (isNaN(numero)) return res.status(400).json({ error: 'Numéro invalide' });
@@ -40,7 +40,7 @@ router.get('/numero/:catwayNumber', async (req, res) => {
   }
 });
 
-// 📌 Détail par ID Mongo
+//  Détail par ID Mongo
 router.get('/:id', async (req, res) => {
   try {
     const catway = await Catway.findById(req.params.id);
@@ -51,7 +51,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// 🛠️ Mise à jour d’un catway
+//  Mise à jour d’un catway
 router.patch('/:id', async (req, res) => {
   try {
     const updated = await Catway.findByIdAndUpdate(
@@ -66,7 +66,7 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
-// ❌ Supprimer un catway
+//  Supprimer un catway
 router.delete('/:id', async (req, res) => {
   try {
     const deleted = await Catway.findByIdAndDelete(req.params.id);

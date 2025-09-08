@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-// 👤 Création d'un utilisateur
+//  Création d'un utilisateur
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
